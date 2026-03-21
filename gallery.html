@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Photo Gallery - See our vibrant classrooms, activities, outdoor play, and happy moments at Sunshine Sprouts.">
+  <meta name="keywords" content="gallery, photos, classrooms, activities, video, center tour">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sunshinesprouts.com/gallery.html">
+  <meta property="og:title" content="Photo Gallery | Sunshine Sprouts Child Care">
+  <meta property="og:description" content="Explore photos of our center, classrooms, activities, and daily moments at Sunshine Sprouts.">
+  
+  <link rel="canonical" href="https://sunshinesprouts.com/gallery.html">
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <title>Photo Gallery | Sunshine Sprouts Child Care</title>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header>
+    <nav class="container">
+      <a href="index.html" class="logo">
+        <span>☀️</span>
+        <span>Sunshine Sprouts</span>
+      </a>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="enrollment.html">Enrollment</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html" class="nav-cta">Book a Tour</a></li>
+      </ul>
+
+      <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="programs.html">Programs</a>
+      <a href="enrollment.html">Enrollment</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="resources.html">Resources</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html" class="nav-cta">Book a Tour</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- HERO BANNER -->
+    <section class="hero hero-small">
+      <div class="hero-content">
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="divider">/</span>
+          <span>Gallery</span>
+        </div>
+        <h1>Our Center & Daily Life</h1>
+      </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section class="bg-background">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: var(--spacing-2xl);">
+          <h2 style="margin-bottom: var(--spacing-md);">Explore Sunshine Sprouts</h2>
+          <p style="color: var(--text-light); font-size: var(--font-size-large);">Click any image to view details and full size</p>
+        </div>
+
+        <!-- FILTER BUTTONS -->
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="classroom">Classrooms</button>
+          <button class="filter-btn" data-filter="outdoor">Outdoor Play</button>
+          <button class="filter-btn" data-filter="activities">Activities</button>
+          <button class="filter-btn" data-filter="events">Events</button>
+          <button class="filter-btn" data-filter="meals">Meals</button>
+        </div>
+
+        <!-- GALLERY GRID -->
+        <div class="masonry-grid">
+          <!-- Classroom Images -->
+          <div class="gallery-item" data-category="classroom" data-caption="Infant Classroom - Soft, Nurturing Space">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-baby"></i>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="classroom" data-caption="Toddler Classroom - Exploration & Learning">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-blocks"></i>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="classroom" data-caption="Preschool Classroom - Creative & Academic Learning">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-palette"></i>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="classroom" data-caption="Reading Corner - Quiet & Cozy">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-book"></i>
+            </div>
+          </div>
+
+          <!-- Outdoor Play -->
+          <div class="gallery-item" data-category="outdoor" data-caption="Outdoor Playground - Physical Development">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-tree"></i>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="outdoor" data-caption="Nature Exploration - Learning Through Play">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-leaf"></i>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="outdoor" data-caption="Water Play - Splash Fun">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-water"></i>
+            </div>
+          </div>
+
+          <!-- Activities -->
+          <div class="gallery-item" data-category="activities" data-caption="Arts & Crafts - Creative Expression">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-paint-brush"></i>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="activities" data-caption="Sensory Play - Exploring Textures">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-hand-paper"></i>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="activities" data-caption="Music Time - Songs & Sounds">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-music"></i>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="activities" data-caption="Storytime - Reading & Imagination">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-microphone"></i>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="activities" data-caption="STEM Learning - Science & Discovery">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-flask"></i>
+            </div>
+          </div>
+
+          <!-- Events -->
+          <div class="gallery-item" data-category="events" data-caption="Holiday Celebration - Family Fun">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-birthday-cake"></i>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="events" data-caption="Field Trip - Exploring the Community">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-bus"></i>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="events" data-caption="Class Performance - Showcasing Talents">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-theater-masks"></i>
+            </div>
+          </div>
+
+          <!-- Meals -->
+          <div class="gallery-item" data-category="meals" data-caption="Mealtime - Nutrition & Community">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-apple-alt"></i>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="meals" data-caption="Snack Time - Healthy Choices">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; transition: var(--transition);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-carrot"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO SECTION -->
+    <section>
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title-accent">Video Tour</h2>
+          <p class="section-subtitle">Get a closer look at Sunshine Sprouts through these virtual tours and testimonials.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="video-tile" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: var(--border-radius); position: relative; cursor: pointer; overflow: hidden;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
+              <div style="background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(4px); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; color: white;">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; color: white; z-index: 3;">
+              <h4 style="margin-bottom: var(--spacing-sm);">Center Tour</h4>
+              <p style="font-size: 12px; opacity: 0.9;">Take a virtual walk through our center</p>
+            </div>
+          </div>
+
+          <div class="video-tile" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: var(--border-radius); position: relative; cursor: pointer; overflow: hidden;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
+              <div style="background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(4px); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; color: white;">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; color: white; z-index: 3;">
+              <h4 style="margin-bottom: var(--spacing-sm);">Parent Testimonials</h4>
+              <p style="font-size: 12px; opacity: 0.9;">Hear from families who trust us</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="bg-background">
+      <div class="container">
+        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+          <h2 style="margin-bottom: var(--spacing-lg);">Want to See More?</h2>
+          <p style="color: var(--text-light); font-size: var(--font-size-large); margin-bottom: var(--spacing-2xl);">
+            Schedule a personal tour and experience the warmth and joy of Sunshine Sprouts firsthand!
+          </p>
+          <a href="contact.html" class="btn btn-primary btn-large">Book Your Tour Today <i class="fas fa-calendar"></i></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay">
+    <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous image">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    
+    <div class="lightbox-content">
+      <div class="lightbox-image"></div>
+      <div class="lightbox-caption"></div>
+      <div style="text-align: center; padding: var(--spacing-md); background: var(--white); border-top: 1px solid var(--border); font-size: var(--font-size-small); color: var(--text-light);">
+        <span class="lightbox-counter">1 / 20</span>
+      </div>
+    </div>
+
+    <button class="lightbox-nav lightbox-next" aria-label="Next image">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <div class="enrolling-banner">
+    <i class="fas fa-star"></i> Now Enrolling for Fall! Limited Spots Available <i class="fas fa-star"></i>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">☀️ Sunshine Sprouts</div>
+        <p class="footer-tagline">"Where Every Child Feels Safe, Seen, and Ready to Grow"</p>
+        <p style="font-size: var(--font-size-small); color: rgba(255, 255, 255, 0.8);">Licensed childcare center serving Springfield, IL since 2010.</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="programs.html">Our Programs</a></li>
+          <li><a href="enrollment.html">Enrollment</a></li>
+          <li><a href="gallery.html">Photo Gallery</a></li>
+          <li><a href="resources.html">Parent Resources</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contact Info</h4>
+        <p>
+          <i class="fas fa-map-marker-alt"></i> 123 Sunshine Lane<br>
+          Springfield, IL 62701
+        </p>
+        <p>
+          <i class="fas fa-phone"></i> <a href="tel:+1-555-123-4567">(555) 123-4567</a>
+        </p>
+        <p>
+          <i class="fas fa-envelope"></i> <a href="mailto:info@sunshinesprouts.com">info@sunshinesprouts.com</a>
+        </p>
+        <p style="font-size: var(--font-size-small); margin-top: var(--spacing-md);">
+          <strong>Hours:</strong><br>
+          Monday - Friday: 6:30 AM - 6:30 PM<br>
+          Closed Sundays & Major Holidays
+        </p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          <a href="https://facebook.com/sunshinesprouts" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook page">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://instagram.com/sunshinesprouts" target="_blank" rel="noopener noreferrer" aria-label="Visit our Instagram page">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://youtube.com/sunshinesprouts" target="_blank" rel="noopener noreferrer" aria-label="Visit our YouTube channel">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="https://pinterest.com/sunshinesprouts" target="_blank" rel="noopener noreferrer" aria-label="Visit our Pinterest page">
+            <i class="fab fa-pinterest-p"></i>
+          </a>
+        </div>
+        <div style="margin-top: var(--spacing-lg);">
+          <h5 style="margin-bottom: var(--spacing-sm);">Newsletter</h5>
+          <p style="font-size: var(--font-size-small); margin-bottom: var(--spacing-md);">Get parenting tips and center updates</p>
+          <form style="display: flex; gap: var(--spacing-sm);" onsubmit="event.preventDefault(); alert('Newsletter signup coming soon!');">
+            <input type="email" placeholder="Your email" style="flex: 1; padding: var(--spacing-sm); border: none; border-radius: var(--border-radius); font-size: 12px;">
+            <button type="submit" class="btn btn-secondary btn-small" style="padding: var(--spacing-sm) var(--spacing-md);">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2024 Sunshine Sprouts Child Care Center. All rights reserved. | <a href="#" style="color: rgba(255, 255, 255, 0.7);">Privacy Policy</a> | <a href="#" style="color: rgba(255, 255, 255, 0.7);">Terms of Service</a></p>
+    </div>
+  </footer>
+
+  <button class="scroll-to-top" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/gallery.js" defer></script>
+</body>
+</html>
