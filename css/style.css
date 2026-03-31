@@ -953,6 +953,15 @@ input[type="radio"] + label {
 /* ============================================
    GRIDS & LAYOUTS
    ============================================ */
+
+/* Two-column layout used on about/programs pages */
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-2xl);
+  align-items: center;
+}
+
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
