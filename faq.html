@@ -61,579 +61,470 @@
     </div>
   </header>
 
+  <style>
+    /* ── FAQ PAGE STYLES ─────────────────────────────── */
+    .faq-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #5a7d5e 60%, var(--accent) 100%);
+      padding: 80px var(--container-padding) 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .faq-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .faq-hero-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .faq-hero .breadcrumb { margin-bottom: 16px; }
+    .faq-hero .breadcrumb a, .faq-hero .breadcrumb span { color: rgba(255,255,255,0.75); font-size: 13px; }
+    .faq-hero .breadcrumb .divider { margin: 0 8px; }
+    .faq-hero h1 { color: #fff; font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 16px; }
+    .faq-hero p { color: rgba(255,255,255,0.87); font-size: 1.1rem; margin-bottom: 40px; }
+
+    /* Search */
+    .faq-search-wrap {
+      background: #fff;
+      border-radius: 16px 16px 0 0;
+      padding: 36px 40px 0;
+      max-width: 700px;
+      margin: 0 auto;
+      box-shadow: 0 -8px 32px rgba(0,0,0,0.08);
+      position: relative;
+    }
+    .faq-search-inner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: var(--background);
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      padding: 4px 4px 4px 20px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .faq-search-inner:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(124,158,128,0.15);
+    }
+    .faq-search-inner i { color: var(--text-light); font-size: 16px; margin-right: 10px; flex-shrink: 0; }
+    #faq-search {
+      flex: 1; border: none; background: transparent;
+      font-size: 15px; color: var(--text); outline: none;
+      font-family: var(--font-body); padding: 10px 0;
+    }
+    #faq-search::placeholder { color: var(--text-light); }
+    #search-clear {
+      display: none; background: var(--primary); color: #fff;
+      border: none; border-radius: 50px; padding: 8px 18px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      font-family: var(--font-ui); white-space: nowrap;
+      transition: background 0.2s;
+    }
+    #search-clear:hover { background: var(--accent); }
+    #search-results-count {
+      font-size: 13px; color: var(--text-light);
+      text-align: center; padding: 10px 0 28px;
+      display: none;
+    }
+
+    /* Stats strip */
+    .faq-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; border-top: 1px solid var(--border);
+      max-width: 700px; margin: 0 auto;
+      background: #fff;
+    }
+    .faq-stat {
+      text-align: center; padding: 20px 16px;
+      border-right: 1px solid var(--border);
+    }
+    .faq-stat:last-child { border-right: none; }
+    .faq-stat-num { font-size: 1.5rem; font-weight: 700; color: var(--primary); font-family: var(--font-heading); }
+    .faq-stat-label { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+
+    /* Category pills */
+    .faq-layout { display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: start; }
+    .faq-sidebar {
+      position: sticky; top: 90px;
+      background: #fff; border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      padding: 24px; overflow: hidden;
+    }
+    .faq-sidebar h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 14px; font-family: var(--font-ui); }
+    .faq-nav-btn {
+      display: flex; align-items: center; gap: 10px;
+      width: 100%; background: none; border: none;
+      text-align: left; padding: 10px 12px; border-radius: 10px;
+      font-size: 14px; color: var(--text); cursor: pointer;
+      font-family: var(--font-body); font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+      margin-bottom: 4px;
+    }
+    .faq-nav-btn i { width: 18px; text-align: center; font-size: 13px; color: var(--text-light); transition: color 0.15s; }
+    .faq-nav-btn:hover, .faq-nav-btn.active { background: rgba(124,158,128,0.12); color: var(--primary); }
+    .faq-nav-btn:hover i, .faq-nav-btn.active i { color: var(--primary); }
+    .faq-nav-btn .pill-count {
+      margin-left: auto; background: var(--background);
+      color: var(--text-light); font-size: 11px; font-weight: 700;
+      border-radius: 20px; padding: 1px 7px;
+    }
+    .faq-nav-btn.active .pill-count { background: var(--primary); color: #fff; }
+
+    /* Accordion */
+    .faq-section { display: none; }
+    .faq-section.visible { display: block; }
+    .faq-section-title {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px; padding-bottom: 14px;
+      border-bottom: 2px solid var(--border);
+    }
+    .faq-section-title .section-icon {
+      width: 42px; height: 42px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .faq-section-title h2 { font-size: 1.25rem; color: var(--text); margin: 0; }
+
+    .faq-card {
+      background: #fff; border-radius: 14px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+      margin-bottom: 10px; overflow: hidden;
+      border: 1px solid transparent;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .faq-card.open { border-color: var(--primary); box-shadow: 0 4px 20px rgba(124,158,128,0.15); }
+    .faq-card.hidden { display: none; }
+
+    .faq-q {
+      width: 100%; display: flex; align-items: center;
+      gap: 14px; padding: 18px 20px;
+      background: none; border: none; cursor: pointer;
+      text-align: left; font-family: var(--font-body);
+    }
+    .faq-q-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--background); display: flex;
+      align-items: center; justify-content: center;
+      font-size: 15px; color: var(--primary); flex-shrink: 0;
+      transition: background 0.2s, color 0.2s;
+    }
+    .faq-card.open .faq-q-icon { background: var(--primary); color: #fff; }
+    .faq-q-text { flex: 1; font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.4; }
+    .faq-q-arrow {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--background); display: flex;
+      align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background 0.2s, transform 0.3s;
+    }
+    .faq-q-arrow i { font-size: 12px; color: var(--text-light); transition: color 0.2s; }
+    .faq-card.open .faq-q-arrow { background: var(--primary); transform: rotate(180deg); }
+    .faq-card.open .faq-q-arrow i { color: #fff; }
+
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.3s;
+      padding: 0 20px;
+    }
+    .faq-card.open .faq-a { max-height: 600px; padding: 0 20px 22px; }
+    .faq-a-inner {
+      border-top: 1px solid var(--border); padding-top: 16px;
+      font-size: 14px; color: var(--text-light); line-height: 1.75;
+    }
+    .faq-a-inner p { margin-bottom: 10px; }
+    .faq-a-inner p:last-child { margin-bottom: 0; }
+    .faq-a-inner ul, .faq-a-inner ol { margin: 10px 0 10px 20px; }
+    .faq-a-inner li { margin-bottom: 6px; }
+    .faq-a-inner strong { color: var(--text); }
+    .faq-a-inner a { color: var(--primary); text-decoration: underline; }
+
+    /* No results */
+    #no-results {
+      display: none; text-align: center; padding: 60px 20px;
+      color: var(--text-light);
+    }
+    #no-results i { font-size: 48px; opacity: 0.3; margin-bottom: 16px; display: block; }
+
+    /* CTA bottom */
+    .faq-cta {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      border-radius: 20px; padding: 48px 40px;
+      text-align: center; color: #fff; margin-top: 40px;
+    }
+    .faq-cta h2 { color: #fff; margin-bottom: 10px; }
+    .faq-cta p { color: rgba(255,255,255,0.87); margin-bottom: 30px; font-size: 1.05rem; }
+    .faq-cta .btn-white { background: #fff; color: var(--primary); border: none; }
+    .faq-cta .btn-white:hover { background: var(--background); }
+    .faq-cta .btn-ghost { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.6); }
+    .faq-cta .btn-ghost:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+
+    @media (max-width: 768px) {
+      .faq-layout { grid-template-columns: 1fr; }
+      .faq-sidebar { position: static; display: flex; flex-wrap: wrap; gap: 8px; padding: 16px; border-radius: 12px; }
+      .faq-sidebar h3 { width: 100%; margin-bottom: 4px; }
+      .faq-nav-btn { width: auto; padding: 7px 14px; background: var(--background); border-radius: 50px; margin-bottom: 0; }
+      .faq-nav-btn .pill-count { display: none; }
+      .faq-stats { grid-template-columns: repeat(2,1fr); }
+      .faq-search-wrap { padding: 24px 20px 0; border-radius: 12px 12px 0 0; }
+      .faq-cta { padding: 32px 24px; }
+    }
+  </style>
+
   <main id="main-content">
-    <!-- HERO BANNER -->
-    <section class="hero hero-small">
-      <div class="hero-content">
+    <!-- HERO -->
+    <section class="faq-hero">
+      <div class="faq-hero-inner">
         <div class="breadcrumb">
           <a href="index.html">Home</a>
           <span class="divider">/</span>
-          <span>FAQ</span>
+          <span style="color:#fff;">FAQ</span>
         </div>
-        <h1>Frequently Asked Questions</h1>
+        <h1>How Can We Help?</h1>
+        <p>Find answers to the questions parents ask us most — from enrollment to daily routines.</p>
+        <div class="faq-search-wrap">
+          <div class="faq-search-inner">
+            <i class="fas fa-search"></i>
+            <input type="text" id="faq-search" placeholder="Search questions, e.g. &ldquo;meals&rdquo; or &ldquo;drop-off&rdquo;…" autocomplete="off">
+            <button id="search-clear">Clear</button>
+          </div>
+          <div id="search-results-count"></div>
+        </div>
+      </div>
+      <!-- Stats strip -->
+      <div class="faq-stats">
+        <div class="faq-stat"><div class="faq-stat-num">25+</div><div class="faq-stat-label">Questions answered</div></div>
+        <div class="faq-stat"><div class="faq-stat-num">5</div><div class="faq-stat-label">Topic categories</div></div>
+        <div class="faq-stat"><div class="faq-stat-num">1–2 hrs</div><div class="faq-stat-label">Response time</div></div>
+        <div class="faq-stat"><div class="faq-stat-num">Free</div><div class="faq-stat-label">Tour available</div></div>
       </div>
     </section>
 
-    <!-- SEARCH BAR -->
-    <section class="bg-background">
-      <div class="container" style="max-width: 600px; margin: 0 auto; padding: var(--spacing-2xl) 0;">
-        <div style="display: flex; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
-          <div style="position: relative; flex: 1;">
-            <i class="fas fa-search" style="position: absolute; left: var(--spacing-md); top: 50%; transform: translateY(-50%); color: var(--text-light);"></i>
-            <input 
-              type="text" 
-              id="faq-search" 
-              placeholder="Search FAQs..." 
-              style="width: 100%; padding: var(--spacing-md); padding-left: 40px; border: 1px solid var(--border); border-radius: var(--border-radius); font-size: var(--font-size-base); box-shadow: 0 2px 8px rgba(0,0,0,0.04);"
-            >
-          </div>
-        </div>
-        <p style="text-align: center; color: var(--text-light); font-size: var(--font-size-small);">
-          Start typing to search through our most common questions and answers
-        </p>
-      </div>
-    </section>
+    <!-- MAIN FAQ LAYOUT -->
+    <section style="background: var(--background); padding: 48px var(--container-padding) 64px;">
+      <div class="container">
+        <div class="faq-layout">
 
-    <!-- FAQ CONTENT -->
-    <section>
-      <div class="container" style="max-width: 800px;">
-        <!-- Enrollment FAQs -->
-        <div class="faq-category">
-          <h2 style="margin-bottom: var(--spacing-lg); padding-bottom: var(--spacing-md); border-bottom: 2px solid var(--primary); color: var(--primary);">
-            <i class="fas fa-file-contract"></i> Enrollment & Admission
-          </h2>
+          <!-- SIDEBAR NAV -->
+          <aside class="faq-sidebar" id="faq-sidebar">
+            <h3>Browse Topics</h3>
+            <button class="faq-nav-btn active" data-target="all"><i class="fas fa-th-large"></i> All Topics <span class="pill-count">25</span></button>
+            <button class="faq-nav-btn" data-target="enrollment"><i class="fas fa-file-contract"></i> Enrollment <span class="pill-count">5</span></button>
+            <button class="faq-nav-btn" data-target="programs"><i class="fas fa-book-open"></i> Programs <span class="pill-count">5</span></button>
+            <button class="faq-nav-btn" data-target="health"><i class="fas fa-shield-alt"></i> Health & Safety <span class="pill-count">5</span></button>
+            <button class="faq-nav-btn" data-target="pricing"><i class="fas fa-tag"></i> Pricing <span class="pill-count">1</span></button>
+            <button class="faq-nav-btn" data-target="operations"><i class="fas fa-tasks"></i> Daily Ops <span class="pill-count">7</span></button>
+            <button class="faq-nav-btn" data-target="transitions"><i class="fas fa-child"></i> Transitions <span class="pill-count">4</span></button>
+          </aside>
 
-          <div class="accordion-container">
-            <div class="accordion-item" data-category="enrollment" data-searchable="When can my child start at NobleNest Daycare">
-              <button class="accordion-header">
-                <span><i class="fas fa-calendar-plus"></i> When can my child start at NobleNest Daycare?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>We accept children from 12 months through age 12. Enrollment is ongoing throughout the year as spaces become available. Our popular programs do fill up, especially during summer and fall sessions. We recommend scheduling a tour and applying early to secure your preferred start date.</p>
+          <!-- FAQ PANELS -->
+          <div id="faq-panels">
+
+            <!-- ENROLLMENT -->
+            <div class="faq-section visible" data-section="enrollment">
+              <div class="faq-section-title">
+                <div class="section-icon" style="background:rgba(124,158,128,0.12); color:var(--primary);"><i class="fas fa-file-contract"></i></div>
+                <h2>Enrollment &amp; Admission</h2>
+              </div>
+
+              <div class="faq-card" data-category="enrollment" data-search="when can my child start age 12 months begin enroll">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-calendar-plus"></i></div><span class="faq-q-text">When can my child start at NobleNest Daycare?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p>We accept children from <strong>12 months through age 12</strong>. Enrollment is ongoing throughout the year as spaces become available. Our popular programs fill up quickly, especially during summer and fall — we recommend applying early.</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="enrollment" data-search="enrollment process steps application how to apply">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-pencil-alt"></i></div><span class="faq-q-text">What is involved in the enrollment process?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p><strong>Our 7-step process:</strong></p><ol><li>Schedule and attend a center tour</li><li>Complete enrollment application (online or in-person)</li><li>Submit required documents</li><li>Receive acceptance letter</li><li>Submit enrollment deposit &amp; sign agreement</li><li>Attend parent orientation</li><li>Start day preparation</li></ol><p>The entire process typically takes 2–4 weeks.</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="enrollment" data-search="documents required birth certificate immunization records residency">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-file-alt"></i></div><span class="faq-q-text">What documents do I need for enrollment?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><ul><li>Proof of residency (utility bill, lease, or mortgage statement)</li><li>Child's birth certificate and social security card (copy)</li><li>Immunization records from your pediatrician</li><li>Physical exam records (within past 12 months)</li><li>Emergency contact form (signed)</li><li>Authorization for pickup form (signed)</li><li>Medical information form</li><li>Enrollment agreement (signed)</li><li>Payment method authorization</li></ul></div></div>
+              </div>
+
+              <div class="faq-card" data-category="enrollment" data-search="enrollment deposit cost fee secure spot">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-credit-card"></i></div><span class="faq-q-text">What is the enrollment deposit?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p>A deposit is required to secure your child's spot. Please <a href="contact.html">contact us</a> for current deposit details. The deposit is credited to your first payment once enrollment begins.</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="enrollment" data-search="part-time flexible schedule days per week custom">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-clock"></i></div><span class="faq-q-text">Do you offer part-time or flexible schedules?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><ul><li><strong>Full-Time:</strong> 5 days per week (most popular)</li><li><strong>Part-Time:</strong> 2–4 days per week (discounted rate)</li><li><strong>Drop-In Care:</strong> Available for current enrollees (subject to availability)</li><li><strong>Custom Schedules:</strong> Contact us to discuss your needs</li></ul></div></div>
               </div>
             </div>
 
-            <div class="accordion-item" data-category="enrollment" data-searchable="What is the enrollment process application requirements">
-              <button class="accordion-header">
-                <span><i class="fas fa-pencil-alt"></i> What is involved in the enrollment process?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p><strong>Our enrollment process includes:</strong></p>
-                <ol style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li>Schedule and attend a center tour</li>
-                  <li>Complete enrollment application (online or in-person)</li>
-                  <li>Submit required documents (proof of residency, immunization records, emergency contact forms)</li>
-                  <li>Receive acceptance letter</li>
-                  <li>Submit enrollment deposit and sign enrollment agreement</li>
-                  <li>Attend parent orientation</li>
-                  <li>Start day preparation and planning</li>
-                </ol>
-                <p style="margin-top: var(--spacing-md);">The entire process typically takes 2-4 weeks.</p>
+            <!-- PROGRAMS -->
+            <div class="faq-section visible" data-section="programs">
+              <div class="faq-section-title">
+                <div class="section-icon" style="background:rgba(201,168,76,0.12); color:var(--secondary);"><i class="fas fa-book-open"></i></div>
+                <h2>Programs &amp; Curriculum</h2>
+              </div>
+
+              <div class="faq-card" data-category="programs" data-search="age groups serve toddler preschool after school summer camp">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-users"></i></div><span class="faq-q-text">What age groups do you serve?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><ul><li><strong>Toddler (12 months – 3 years):</strong> 1 teacher per 6 toddlers</li><li><strong>Preschool (3–5 years):</strong> 1 teacher per 8 children</li><li><strong>After School (5–12 years):</strong> 1 teacher per 10 children</li><li><strong>Summer Camp (all ages):</strong> Mixed-age groups with age-appropriate activities</li></ul></div></div>
+              </div>
+
+              <div class="faq-card" data-category="programs" data-search="educational philosophy curriculum play-based learning approach">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-lightbulb"></i></div><span class="faq-q-text">What is your educational philosophy and curriculum?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p>We use a <strong>play-based, developmentally appropriate approach</strong> focused on child-led learning. Our curriculum integrates:</p><ul><li>Sensory and hands-on learning experiences</li><li>Language and literacy development</li><li>Math and logic through play</li><li>Science and nature exploration</li><li>Social-emotional skill building</li><li>Creative expression through arts and music</li><li>Physical activity and outdoor play</li></ul></div></div>
+              </div>
+
+              <div class="faq-card" data-category="programs" data-search="meals snacks food provided breakfast lunch healthy nutrition">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-apple-alt"></i></div><span class="faq-q-text">Do you provide meals and snacks?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p><strong>Yes!</strong> We provide nutritious meals and snacks daily:</p><ul><li><strong>Toddlers &amp; Preschool:</strong> Breakfast, lunch, and 2 snacks included</li><li><strong>After School:</strong> Healthy snack daily</li></ul><p>All meals meet USDA nutrition standards. We accommodate allergies and dietary restrictions. Weekly menus are posted in classrooms. Families may also send their own meals in labeled, airtight containers.</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="programs" data-search="outdoor play time outside playground nature activities 60 minutes">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-tree"></i></div><span class="faq-q-text">How much outdoor play time do children get?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p>At least <strong>60 minutes daily</strong> outdoors, weather permitting. Activities include playground equipment, nature exploration, gardening, sidewalk chalk, sports, and water play in warm months. Closed-toe shoes required.</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="programs" data-search="enrichment activities special classes music yoga stem art coding">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-star"></i></div><span class="faq-q-text">Do you offer enrichment activities or special classes?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><ul><li><strong>Ages 2+:</strong> Music &amp; Movement (2× weekly)</li><li><strong>Ages 3+:</strong> Yoga &amp; Mindfulness (1× weekly)</li><li><strong>Ages 4+:</strong> Pre-K Skills &amp; STEM Exploration (2× weekly)</li><li><strong>After School:</strong> Sports, art, coding basics, and homework help</li></ul><p>All included in enrollment — no extra fees for standard enrichment.</p></div></div>
               </div>
             </div>
 
-            <div class="accordion-item" data-category="enrollment" data-searchable="What documents do I need for enrollment">
-              <button class="accordion-header">
-                <span><i class="fas fa-file-alt"></i> What documents do I need to provide for enrollment?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p><strong>Required documents include:</strong></p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li>Proof of residency (utility bill, lease, or mortgage statement)</li>
-                  <li>Child's birth certificate and social security card (copy)</li>
-                  <li>Immunization records from your pediatrician</li>
-                  <li>Physical exam records (within past 12 months)</li>
-                  <li>Emergency contact form (signed)</li>
-                  <li>Authorization for pickup form (signed)</li>
-                  <li>Medical information form</li>
-                  <li>Enrollment agreement (signed)</li>
-                  <li>Payment method authorization</li>
-                </ul>
+            <!-- HEALTH & SAFETY -->
+            <div class="faq-section visible" data-section="health">
+              <div class="faq-section-title">
+                <div class="section-icon" style="background:rgba(67,170,139,0.12); color:#43AA8B;"><i class="fas fa-shield-alt"></i></div>
+                <h2>Health &amp; Safety</h2>
+              </div>
+
+              <div class="faq-card" data-category="health" data-search="illness sick day fever vomiting rash pink eye policy stay home">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-hospital"></i></div><span class="faq-q-text">What is your illness / sick day policy?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p>Children should stay home if they have:</p><ul><li>Fever of 100.4°F or higher (fever-free 24 hrs without medication to return)</li><li>Vomiting or diarrhea</li><li>Unexplained rash</li><li>Conjunctivitis/pink eye (until treated 24 hrs)</li><li>Strep throat or impetigo (until treated 24 hrs)</li></ul><p>If a child becomes ill at our center, we call for pickup. Parents must arrive within 1 hour.</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="health" data-search="immunizations vaccinations required DTP polio MMR varicella hepatitis">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-syringe"></i></div><span class="faq-q-text">What immunizations are required?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p>All children must have current immunizations per Texas DSHS guidelines. Required vaccines include DTP, Polio, MMR, Varicella, Hepatitis B, Hib, and Pneumococcal. Medical or religious exemptions can be discussed.</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="health" data-search="medication allergies administer authorization prescription epipen">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-prescription-bottle"></i></div><span class="faq-q-text">How do you handle medications and allergies?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p><strong>Medications:</strong> Administered only with written parent authorization, original packaging, and child's name and instructions clearly labeled.</p><p><strong>Allergies:</strong> Detailed allergy info on file for each child. Staff trained on allergy protocols; separate meals/snacks prepared for food-allergic children. Severe allergies require an emergency action plan.</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="health" data-search="safety security measures background check cameras supervision doors locked">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-lock"></i></div><span class="faq-q-text">What safety and security measures do you have?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><ul><li><strong>Secure Entry:</strong> All doors locked; keypad/key access only</li><li><strong>Background Checks:</strong> All staff pass criminal background screening</li><li><strong>Constant Supervision:</strong> Indoor and outdoor at all times</li><li><strong>First Aid Trained:</strong> All staff certified</li><li><strong>Emergency Drills:</strong> Monthly fire drills, biannual tornado drills</li><li><strong>Authorized Pickup:</strong> Photo ID required for all pickups</li><li><strong>Security Cameras:</strong> Common areas (not bathrooms)</li></ul></div></div>
+              </div>
+
+              <div class="faq-card" data-category="health" data-search="COVID-19 coronavirus illness protocols sanitization hand hygiene CDC">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-virus"></i></div><span class="faq-q-text">Do you follow COVID-19 / illness protocols?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p>Yes. We maintain regular sanitization of high-touch surfaces, hand hygiene education, updated illness policies per CDC and DSHS guidelines, and respiratory etiquette training. We notify families of any exposure or illness in the classroom.</p></div></div>
               </div>
             </div>
 
-            <div class="accordion-item" data-category="enrollment" data-searchable="What is the enrollment deposit cost">
-              <button class="accordion-header">
-                <span><i class="fas fa-credit-card"></i> What is the enrollment deposit?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>An enrollment deposit is required to secure your child's spot and start date. Please <a href="contact.html">contact us</a> for current deposit details. The deposit is credited to your first payment once enrollment begins.</p>
+            <!-- PRICING -->
+            <div class="faq-section visible" data-section="pricing">
+              <div class="faq-section-title">
+                <div class="section-icon" style="background:rgba(123,158,183,0.15); color:var(--accent);"><i class="fas fa-tag"></i></div>
+                <h2>Pricing &amp; Enrollment</h2>
+              </div>
+              <div class="faq-cta" style="margin-top:0;">
+                <div style="font-size:52px; margin-bottom:12px;">🏡</div>
+                <h2>Interested in our rates?</h2>
+                <p>We'd love to walk you through everything personally. Reach out and we'll share all the details.</p>
+                <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+                  <a href="enrollment.html" class="btn btn-white btn-large"><i class="fas fa-pen"></i> Enroll Today</a>
+                  <a href="contact.html" class="btn btn-ghost btn-large"><i class="fas fa-calendar-check"></i> Book a Tour</a>
+                </div>
               </div>
             </div>
 
-            <div class="accordion-item" data-category="enrollment" data-searchable="Can I enroll for part-time or flexible schedule">
-              <button class="accordion-header">
-                <span><i class="fas fa-clock"></i> Do you offer part-time or flexible schedules?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>Yes! We offer flexible enrollment options to fit your family's needs:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li><strong>Full-Time:</strong> 5 days per week (most popular)</li>
-                  <li><strong>Part-Time:</strong> 2-4 days per week (discounted rate)</li>
-                  <li><strong>Drop-In Care:</strong> Available for current enrollees (subject to availability — contact us for rates)</li>
-                  <li><strong>Custom Schedules:</strong> We can often accommodate unique schedules - contact us to discuss</li>
-                </ul>
+            <!-- OPERATIONS -->
+            <div class="faq-section visible" data-section="operations">
+              <div class="faq-section-title">
+                <div class="section-icon" style="background:rgba(118,75,162,0.1); color:#764BA2;"><i class="fas fa-tasks"></i></div>
+                <h2>Daily Operations &amp; Routines</h2>
               </div>
-            </div>
-          </div>
-        </div>
 
-        <!-- Programs & Curriculum FAQs -->
-        <div class="faq-category" style="margin-top: var(--spacing-3xl);">
-          <h2 style="margin-bottom: var(--spacing-lg); padding-bottom: var(--spacing-md); border-bottom: 2px solid var(--secondary); color: var(--secondary);">
-            <i class="fas fa-book"></i> Programs & Curriculum
-          </h2>
-
-          <div class="accordion-container">
-            <div class="accordion-item" data-category="programs" data-searchable="What age groups do you serve programs">
-              <button class="accordion-header">
-                <span><i class="fas fa-baby"></i> What age groups do you serve?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <ul style="margin-left: 20px;">
-                  <li><strong>Toddler (12 months - 3 years):</strong> 1 teacher per 6 toddlers</li>
-                  <li><strong>Preschool (3 - 5 years):</strong> 1 teacher per 8 children</li>
-                  <li><strong>After School (school-age 5-12 years):</strong> 1 teacher per 10 children</li>
-                  <li><strong>Summer Camp (all ages):</strong> Mixed-age groups with age-appropriate activities</li>
-                </ul>
+              <div class="faq-card" data-category="operations" data-search="daily schedule routine preschool morning breakfast lunch nap pickup">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-clock"></i></div><span class="faq-q-text">What is your daily schedule?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p><strong>Sample Daily Schedule (Preschool):</strong></p><ul><li>7:00–7:30 AM: Arrival &amp; Free Play</li><li>7:30–8:00 AM: Breakfast</li><li>8:00–9:30 AM: Circle Time &amp; Learning Activities</li><li>9:30–10:00 AM: Snack Time</li><li>10:00–11:30 AM: Outdoor Play</li><li>11:30 AM–12:30 PM: Lunch &amp; Rest Prep</li><li>12:30–2:30 PM: Quiet Rest / Nap Time</li><li>2:30–3:00 PM: Wake-up &amp; Snack</li><li>3:00–4:30 PM: Activity Time (Art, STEM, Music)</li><li>4:30–5:30 PM: Free Play &amp; Pickup</li></ul><p>Toddlers have shorter activities and more nap/meal time.</p></div></div>
               </div>
-            </div>
 
-            <div class="accordion-item" data-category="programs" data-searchable="What is your educational curriculum philosophy">
-              <button class="accordion-header">
-                <span><i class="fas fa-lightbulb"></i> What is your educational philosophy and curriculum?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>We use a <strong>play-based, developmentally appropriate approach</strong> that emphasizes child-led learning through exploration and discovery. Our curriculum integrates:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li>Sensory and hands-on learning experiences</li>
-                  <li>Language and literacy development</li>
-                  <li>Math and logic concepts through play</li>
-                  <li>Science and nature exploration</li>
-                  <li>Social-emotional skill building</li>
-                  <li>Creative expression through arts and music</li>
-                  <li>Physical activity and outdoor play</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);">Teachers observe children to understand individual interests and learning styles, then create experiences that build on their natural curiosity.</p>
+              <div class="faq-card" data-category="operations" data-search="what to bring pack send child bag backpack clothes shoes">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-backpack"></i></div><span class="faq-q-text">What should I send my child in with?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><ul><li>Weather-appropriate clothing (jacket, hat, raincoat)</li><li>Closed-toe shoes (required for outdoor play)</li><li>Extra set of clothes (2–3 sets in case of accidents)</li><li>Diapers/Pull-ups and wipes (parent-supplied)</li><li>Blanket/comfort item for rest time</li><li>Any medications (with authorization forms)</li><li>Labeled backpack or bag</li></ul><p><strong>Do NOT send:</strong> Toys from home, candy, nut products, or items with small parts.</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="operations" data-search="diapers wipes bottles formula car seat parent supplied provide">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-baby"></i></div><span class="faq-q-text">Do you provide diapers, wipes, or bottles?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p>All of the following must be <strong>provided by families</strong> — we do not supply them:</p><ul><li>Diapers or pull-ups (sufficient quantity for the day)</li><li>Wipes (fragrance-free recommended)</li><li>Diaper cream (labeled with child's name)</li><li>Bottles and formula (pre-measured and labeled, if applicable)</li><li>Car seat (parent responsibility for drop-off and pickup)</li></ul><p>Please label all items with your child's name.</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="operations" data-search="communicate parents app updates photos email text conferences">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-comments"></i></div><span class="faq-q-text">How do you communicate with parents?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><ul><li><strong>Parent App:</strong> Daily updates, photos, messages</li><li><strong>Classroom Boards:</strong> Weekly themes and in-classroom messages</li><li><strong>Email:</strong> Announcements and monthly newsletters</li><li><strong>Text Messages:</strong> Urgent and emergency notifications</li><li><strong>In-Person:</strong> Quick conversations at pickup/drop-off</li><li><strong>Conferences:</strong> Scheduled parent-teacher meetings 2× yearly</li></ul><p>Toddlers receive daily reports including meals, sleep, and diaper changes.</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="operations" data-search="visit child during day observation lunch volunteering classroom">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-eye"></i></div><span class="faq-q-text">Can I visit my child during the day?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p>Yes! Parents are always welcome. We encourage scheduled observations, lunch visits, special event participation, and classroom volunteering. Please sign in at the front office.</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="operations" data-search="pickup drop-off hours time 7am 5:30pm late fee window arrival">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-car"></i></div><span class="faq-q-text">When can I pick up and drop off?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p><strong>Center Hours:</strong> Monday – Friday, 7:00 AM – 5:30 PM</p><p><strong>Drop-off Window:</strong> 7:00–9:30 AM (depending on program)</p><p><strong>Pickup Window:</strong> 4:00–5:30 PM</p><p><strong>Late Fee:</strong> $1/minute after 5:30 PM, per child. Please pick up by 4:30 PM when possible.</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="operations" data-search="siblings same classroom together age placement preference">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-user-friends"></i></div><span class="faq-q-text">Are siblings in the same classroom?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p>Siblings are typically placed in age-appropriate classrooms. However, we can accommodate requests to keep siblings together when possible. Please discuss preferences during enrollment.</p></div></div>
               </div>
             </div>
 
-            <div class="accordion-item" data-category="programs" data-searchable="Do you provide meals and snacks for children">
-              <button class="accordion-header">
-                <span><i class="fas fa-apple-alt"></i> Do you provide meals and snacks?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p><strong>Yes!</strong> We provide nutritious meals and snacks daily:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li><strong>Toddlers & Preschool:</strong> Breakfast, lunch, and 2 snacks included</li>
-                  <li><strong>After School:</strong> Healthy snack daily</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);">All meals meet USDA nutrition standards. We accommodate allergies and dietary restrictions (vegetarian, dairy-free, gluten-free, etc.). Weekly menus are posted in classrooms and on the parent portal.</p>
-                <p style="margin-top: var(--spacing-md);"><strong>Special Dietary Needs:</strong> Families can provide their own meals/snacks if preferred. Please provide in labeled, airtight containers.</p>
+            <!-- TRANSITIONS -->
+            <div class="faq-section visible" data-section="transitions">
+              <div class="faq-section-title">
+                <div class="section-icon" style="background:rgba(102,126,234,0.1); color:#667EEA;"><i class="fas fa-child"></i></div>
+                <h2>Transitions &amp; Special Support</h2>
+              </div>
+
+              <div class="faq-card" data-category="transitions" data-search="transition starting adjustment separation anxiety orientation gradual">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-heart"></i></div><span class="faq-q-text">How do you help children adjust when starting?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><ul><li><strong>Parent Orientation:</strong> Meet teachers, tour classroom</li><li><strong>Gradual Introduction:</strong> 1–2 hours first day, extending over a week</li><li><strong>Comfort Items:</strong> Favourite toy, blanket, or family photo welcome</li><li><strong>Consistent Schedule:</strong> Same drop-off/pickup times build security</li><li><strong>Daily Communication:</strong> Mood and activities shared via parent app</li><li><strong>Separation Anxiety Support:</strong> Positive goodbye routines</li></ul><p>Adjustment typically takes 2–3 weeks. Most children quickly learn you always come back!</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="transitions" data-search="developmental delays special needs autism speech disability inclusive support">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-hands-helping"></i></div><span class="faq-q-text">Do you support children with special needs?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p>Yes! We welcome children with diverse needs including speech/language delays, physical disabilities, hearing or vision impairments, Autism Spectrum Disorder, and behavioral or emotional challenges. We create individualized support plans alongside families and therapists.</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="transitions" data-search="potty training toilet readiness accidents pull-ups routine consistency">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-toilet"></i></div><span class="faq-q-text">Do you help with potty training?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><p>Absolutely! We support potty training when your child shows readiness signs (typically 2.5–3 years). We use consistent routines, positive reinforcement, no shame around accidents, and coordinate closely with home for consistency. Pull-ups/diapers are encouraged during transitions.</p></div></div>
+              </div>
+
+              <div class="faq-card" data-category="transitions" data-search="kindergarten readiness preparation pre-k academic skills letters numbers social">
+                <button class="faq-q" aria-expanded="false"><div class="faq-q-icon"><i class="fas fa-school"></i></div><span class="faq-q-text">How do you prepare children for kindergarten?</span><div class="faq-q-arrow"><i class="fas fa-chevron-down"></i></div></button>
+                <div class="faq-a"><div class="faq-a-inner"><ul><li><strong>Academic Skills:</strong> Letter recognition, number concepts, pre-writing</li><li><strong>Social Skills:</strong> Directions, listening, cooperation, sharing</li><li><strong>Self-Care:</strong> Bathroom independence, handwashing, eating etiquette</li><li><strong>Kindergarten Visits:</strong> Field trips and meetings with teachers</li><li><strong>Parent Guidance:</strong> Tips for supporting readiness at home</li></ul></div></div>
               </div>
             </div>
 
-            <div class="accordion-item" data-category="programs" data-searchable="How much outdoor play time do children get">
-              <button class="accordion-header">
-                <span><i class="fas fa-tree"></i> How much outdoor play time do children get?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>Outdoor play is a critical part of our daily routine. Weather permitting, children go outside for at least 60 minutes daily, plus additional outdoor time during open-play periods. Outdoor play includes:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li>Playground equipment and climbing</li>
-                  <li>Nature exploration and gardening</li>
-                  <li>Sidewalk chalk, bubbles, and games</li>
-                  <li>Sports and movement activities</li>
-                  <li>Water play (warm months)</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);">Please send weather-appropriate clothing daily. Closed-toe shoes are required for outdoor play.</p>
+            <!-- No results message -->
+            <div id="no-results">
+              <i class="fas fa-search"></i>
+              <h3 style="margin-bottom:8px;">No results found</h3>
+              <p>Try different keywords or <a href="contact.html" style="color:var(--primary);">contact us</a> directly.</p>
+            </div>
+
+            <!-- CTA -->
+            <div class="faq-cta" id="faq-bottom-cta">
+              <h2>Still have a question?</h2>
+              <p>Don't see your answer? Our team is happy to help — reach out or book a free tour today.</p>
+              <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+                <a href="contact.html" class="btn btn-white btn-large">Contact Us</a>
+                <a href="contact.html" class="btn btn-ghost btn-large">Book a Tour</a>
               </div>
             </div>
 
-            <div class="accordion-item" data-category="programs" data-searchable="Do you offer enrichment activities special classes">
-              <button class="accordion-header">
-                <span><i class="fas fa-star"></i> Do you offer enrichment activities or special classes?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>Yes! We offer age-appropriate enrichment activities throughout the week:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li><strong>Ages 2+:</strong> Music & Movement (2x weekly)</li>
-                  <li><strong>Ages 3+:</strong> Yoga & Mindfulness (1x weekly)</li>
-                  <li><strong>Ages 4+:</strong> Pre-K Skills & STEM Exploration (2x weekly)</li>
-                  <li><strong>After School:</strong> Sports, art, coding basics, and homework help</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);">These are included in your enrollment — no additional fees for standard enrichment.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Health & Safety FAQs -->
-        <div class="faq-category" style="margin-top: var(--spacing-3xl);">
-          <h2 style="margin-bottom: var(--spacing-lg); padding-bottom: var(--spacing-md); border-bottom: 2px solid #43AA8B; color: #43AA8B;">
-            <i class="fas fa-shield-alt"></i> Health & Safety
-          </h2>
-
-          <div class="accordion-container">
-            <div class="accordion-item" data-category="health" data-searchable="What are your illness sick day policy">
-              <button class="accordion-header">
-                <span><i class="fas fa-hospital"></i> What is your illness/sick day policy?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>To keep our community healthy, children should stay home if they have:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li>Fever of 100.4°F or higher (must be fever-free for 24 hours without medication)</li>
-                  <li>Vomiting or diarrhea</li>
-                  <li>Unexplained rash</li>
-                  <li>Cough or congestion</li>
-                  <li>Conjunctivitis/pink eye (until treated for 24 hours)</li>
-                  <li>Strep throat or impetigo (until treated for 24 hours)</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);">If your child becomes ill while at our center, we call for immediate pickup. A staff member supervises your child in isolation. Parents must pick up within 1 hour.</p>
-              </div>
-            </div>
-
-            <div class="accordion-item" data-category="health" data-searchable="What immunizations vaccinations are required">
-              <button class="accordion-header">
-                <span><i class="fas fa-syringe"></i> What immunizations are required?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>All children must have current immunizations per Illinois Department of Public Health guidelines. Required vaccines include:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li>DTP (Diphtheria, Tetanus, Pertussis)</li>
-                  <li>Polio</li>
-                  <li>MMR (Measles, Mumps, Rubella)</li>
-                  <li>Varicella (Chickenpox)</li>
-                  <li>Hepatitis B</li>
-                  <li>Hib and Pneumococcal (for children under 5)</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);">Medical or religious exemptions can be discussed. Immunization records must be current at enrollment and updated annually.</p>
-              </div>
-            </div>
-
-            <div class="accordion-item" data-category="health" data-searchable="How do you handle medication allergies">
-              <button class="accordion-header">
-                <span><i class="fas fa-prescription-bottle"></i> How do you handle medications and allergies?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p><strong>Medications:</strong> Staff can only administer medication with:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li>Written parent authorization</li>
-                  <li>Original prescription or over-the-counter packaging</li>
-                  <li>Clearly labeled with child's name and instructions</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);"><strong>Allergies:</strong> We maintain detailed allergy information for each child. Staff are trained on allergy protocols. We prepare separate meals/snacks for children with food allergies and use separate utensils to prevent cross-contamination.</p>
-                <p style="margin-top: var(--spacing-md);"><strong>Severe Allergies:</strong> For severe/life-threatening allergies, an emergency action plan is required and reviewed with staff.</p>
-              </div>
-            </div>
-
-            <div class="accordion-item" data-category="health" data-searchable="What safety measures do you have security">
-              <button class="accordion-header">
-                <span><i class="fas fa-lock"></i> What safety and security measures do you have?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>Child safety is our top priority. Our measures include:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li><strong>Secure Building:</strong> All doors locked; authorized entry only via keypad/key</li>
-                  <li><strong>Background Checks:</strong> All staff pass criminal background screening</li>
-                  <li><strong>Supervision:</strong> Children supervised at all times (indoor and outdoor)</li>
-                  <li><strong>Trained Staff:</strong> First Aid trained and experienced in child development</li>
-                  <li><strong>Emergency Procedures:</strong> Fire drills monthly, tornado drills biannually, intruder response plan</li>
-                  <li><strong>Pickup Authorization:</strong> Only authorized adults can pick up; photo ID required</li>
-                  <li><strong>Cameras:</strong> Security cameras in common areas (not bathrooms)</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="accordion-item" data-category="health" data-searchable="Do you follow COVID-19 coronavirus safety protocols">
-              <button class="accordion-header">
-                <span><i class="fas fa-virus"></i> Do you follow COVID-19/illness protocols?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>Yes, we maintain health and safety standards including:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li>Regular sanitization of high-touch surfaces</li>
-                  <li>Hand hygiene education and practices</li>
-                  <li>Flexible scheduling for children with mild symptoms</li>
-                  <li>Updated illness policies (per CDC and IDPH guidelines)</li>
-                  <li>Respiratory etiquette training</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);">We follow current public health guidance and notify families of any exposure or illness in the classroom.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Billing & Payment FAQs -->
-        <div class="faq-category" style="margin-top: var(--spacing-3xl);">
-          <h2 style="margin-bottom: var(--spacing-lg); padding-bottom: var(--spacing-md); border-bottom: 2px solid var(--accent); color: var(--accent);">
-            <i class="fas fa-dollar-sign"></i> Pricing & Enrollment
-          </h2>
-
-          <div style="text-align: center; padding: var(--spacing-2xl); background: var(--card-bg); border-radius: var(--border-radius); box-shadow: var(--shadow-md);">
-            <div style="font-size: 48px; margin-bottom: var(--spacing-md);">🏡</div>
-            <h3 style="margin-bottom: var(--spacing-md);">Interested in pricing?</h3>
-            <p style="color: var(--text-light); font-size: var(--font-size-large); margin-bottom: var(--spacing-2xl); max-width: 500px; margin-left: auto; margin-right: auto;">
-              We'd love to share all the details with you personally. Reach out to us and we'll walk you through everything.
-            </p>
-            <div style="display: flex; gap: var(--spacing-lg); justify-content: center; flex-wrap: wrap;">
-              <a href="enrollment.html" class="btn btn-primary btn-large">
-                <i class="fas fa-pen"></i> Enroll Today
-              </a>
-              <a href="contact.html" class="btn btn-accent btn-large">
-                <i class="fas fa-calendar-check"></i> Book a Tour
-              </a>
-              <a href="contact.html" class="btn btn-outline btn-large">
-                <i class="fas fa-home"></i> Join the NobleNest Family
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Daily Operations FAQs -->
-        <div class="faq-category" style="margin-top: var(--spacing-3xl);">
-          <h2 style="margin-bottom: var(--spacing-lg); padding-bottom: var(--spacing-md); border-bottom: 2px solid #764BA2; color: #764BA2;">
-            <i class="fas fa-tasks"></i> Daily Operations & Routines
-          </h2>
-
-          <div class="accordion-container">
-            <div class="accordion-item" data-category="operations" data-searchable="What is your daily schedule routine">
-              <button class="accordion-header">
-                <span><i class="fas fa-clock"></i> What is your daily schedule?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p><strong>Sample Daily Schedule (Preschool):</strong></p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li>6:30-7:30 AM: Arrival & Free Play</li>
-                  <li>7:30-8:00 AM: Breakfast</li>
-                  <li>8:00-9:30 AM: Circle Time & Learning Activities</li>
-                  <li>9:30-10:00 AM: Snack Time</li>
-                  <li>10:00-11:30 AM: Outdoor Play</li>
-                  <li>11:30 AM-12:30 PM: Lunch & Rest Prep</li>
-                  <li>12:30-2:30 PM: Quiet Rest/Nap Time</li>
-                  <li>2:30-3:00 PM: Wake-up & Snack</li>
-                  <li>3:00-4:30 PM: Activity Time (Art, STEM, Music)</li>
-                  <li>4:30-5:30 PM: Free Play, Pickup</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);">Schedules vary by age group. Toddlers have shorter activities and more nap/meal time.</p>
-              </div>
-            </div>
-
-            <div class="accordion-item" data-category="operations" data-searchable="What should I bring what items pack diaper bag">
-              <button class="accordion-header">
-                <span><i class="fas fa-backpack"></i> What should I send my child in with?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p><strong>Daily Items to Send:</strong></p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li>Weather-appropriate clothing (jacket, hat, mittens, raincoat)</li>
-                  <li>Closed-toe shoes (for outdoor play)</li>
-                  <li>Extra set of clothes (2-3 in case of accidents)</li>
-                  <li>Diapers/Pull-ups and wipes (parent-supplied)</li>
-                  <li>Blanket/comfort item for rest time</li>
-                  <li>Any medications (with authorization forms)</li>
-                  <li>Labeled backpack or bag</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);"><strong>Do NOT send:</strong> Toys from home, candy, nuts/peanut products, or items with small parts.</p>
-              </div>
-            </div>
-
-            <div class="accordion-item" data-category="operations" data-searchable="Do you provide diapers wipes supplies">
-              <button class="accordion-header">
-                <span><i class="fas fa-diaper"></i> Do you provide diapers and wipes?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>All diapers, wipes, bottles, formula, and car seats must be provided by families. Please send:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li>Diapers or pull-ups (sufficient quantity for the day)</li>
-                  <li>Wipes (fragrance-free recommended)</li>
-                  <li>Diaper cream (if needed, labeled with child's name)</li>
-                  <li>Bottles and formula (if applicable, pre-measured and labeled)</li>
-                  <li>Car seat (parent responsibility for drop-off and pickup)</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);">All items should be labeled with your child's name. We do not supply any of these items.</p>
-              </div>
-            </div>
-
-            <div class="accordion-item" data-category="operations" data-searchable="How do you communicate with parents daily updates">
-              <button class="accordion-header">
-                <span><i class="fas fa-comments"></i> How do you communicate with parents?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p><strong>Communication Methods:</strong></p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li><strong>Parent App:</strong> Daily updates, photos, messages (for all ages)</li>
-                  <li><strong>Classroom Boards:</strong> In-classroom messages and weekly themes posted</li>
-                  <li><strong>Email:</strong> Center-wide announcements and monthly newsletters</li>
-                  <li><strong>Text Messages:</strong> Urgent notifications and emergency requests</li>
-                  <li><strong>In-Person:</strong> Quick conversations at pickup/drop-off</li>
-                  <li><strong>Conferences:</strong> Scheduled parent-teacher meetings 2x yearly</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);">Toddlers receive daily reports including meals, sleep, and diaper changes. We keep parents informed about their child's development and activities!</p>
-              </div>
-            </div>
-
-            <div class="accordion-item" data-category="operations" data-searchable="Can I visit my child during the day observation">
-              <button class="accordion-header">
-                <span><i class="fas fa-eye"></i> Can I visit my child during the day?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>Yes! Parents are always welcome to visit. We encourage:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li>Scheduled observations (contact classroom teacher)</li>
-                  <li>Lunch visits</li>
-                  <li>Special event participation</li>
-                  <li>Classroom volunteering</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);">Please check in at the front office and follow all sign-in procedures. During transitions (arrival/pickup), we ask visitors to limit classroom interruption.</p>
-              </div>
-            </div>
-
-            <div class="accordion-item" data-category="operations" data-searchable="What time are pickup drop-off hours">
-              <button class="accordion-header">
-                <span><i class="fas fa-car"></i> When can I pick up and drop off?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p><strong>Center Hours:</strong> 7:00 AM - 5:30 PM, Monday-Friday</p>
-                <p style="margin-top: var(--spacing-md);"><strong>Flexible Arrival Window:</strong> Drop-off between 7:00-9:30 AM (depending on program)</p>
-                <p style="margin-top: var(--spacing-md);"><strong>Flexible Pickup Window:</strong> 4:00-5:30 PM</p>
-                <p style="margin-top: var(--spacing-md);"><strong>Late fees:</strong> $1/minute after 5:30 PM (applied per child)</p>
-                <p style="margin-top: var(--spacing-md);">We ask that you pick up by 4:30 PM when possible, allowing time to prepare for after-school programming.</p>
-              </div>
-            </div>
-
-            <div class="accordion-item" data-category="operations" data-searchable="Are siblings in same classroom between ages">
-              <button class="accordion-header">
-                <span><i class="fas fa-user-friends"></i> Are siblings in the same classroom?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>Siblings are typically placed in age-appropriate classrooms to support their development with peers at similar stages. However, we can accommodate requests to keep siblings together when possible, particularly during transitions or if recommended for behavioral/emotional support.</p>
-                <p style="margin-top: var(--spacing-md);">Please discuss sibling placement preferences during enrollment. We'll do our best to honor requests within our programming structure.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Transition & Special Needs FAQs -->
-        <div class="faq-category" style="margin-top: var(--spacing-3xl);">
-          <h2 style="margin-bottom: var(--spacing-lg); padding-bottom: var(--spacing-md); border-bottom: 2px solid #667EEA; color: #667EEA;">
-            <i class="fas fa-arrow-right"></i> Transitions & Special Support
-          </h2>
-
-          <div class="accordion-container">
-            <div class="accordion-item" data-category="transitions" data-searchable="How do you help children transition start adjustment">
-              <button class="accordion-header">
-                <span><i class="fas fa-heart"></i> How do you help children adjust when starting?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>We understand starting childcare is a big change! Our transition process includes:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li><strong>Parent Orientation:</strong> Meet teachers, tour classroom, discuss your child's needs</li>
-                  <li><strong>Gradual Introduction:</strong> Recommend 1-2 hours first day, extending over 1 week</li>
-                  <li><strong>Comfort Items:</strong> Bring favorite toy, blanket, or family photo</li>
-                  <li><strong>Consistent Schedule:</strong> Same drop-off/pickup times help children feel secure</li>
-                  <li><strong>Daily Communication:</strong> Teachers share activities and mood via parent app</li>
-                  <li><strong>Separation Anxiety Support:</strong> We use positive goodbye routines and distraction techniques</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);">Adjustment typically takes 2-3 weeks. Most children quickly learn that you always come back for them!</p>
-              </div>
-            </div>
-
-            <div class="accordion-item" data-category="transitions" data-searchable="Do you support children developmental delays special needs">
-              <button class="accordion-header">
-                <span><i class="fas fa-accessibility"></i> Do you support children with developmental delays or special needs?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>Yes! We welcome children with diverse needs. Our inclusive environment supports:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li>Speech/language delays</li>
-                  <li>Physical disabilities and mobility needs</li>
-                  <li>Hearing or vision impairments</li>
-                  <li>Autism Spectrum Disorder</li>
-                  <li>Behavioral or emotional challenges</li>
-                  <li>Developmental delays</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);">We'll work with your family, Early Intervention specialists, school districts, and therapists to create individualized support plans. Some children may require a classroom aide—this is discussed at enrollment.</p>
-                <p style="margin-top: var(--spacing-md);">We maintain wheelchair accessibility and adapted equipment as needed.</p>
-              </div>
-            </div>
-
-            <div class="accordion-item" data-category="transitions" data-searchable="Do you help with potty training toilet training readiness">
-              <button class="accordion-header">
-                <span><i class="fas fa-toilet"></i> Do you help with potty training?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>Absolutely! We support potty training when your child shows readiness signs (typically 2.5-3 years). Our approach includes:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li>Communication with parents about readiness indicators</li>
-                  <li>Consistent potty routines throughout the day</li>
-                  <li>Positive reinforcement and celebration of successes</li>
-                  <li>No pressure or shame around accidents</li>
-                  <li>Coordination between home and school for consistency</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);">Daytime accidents are normal and expected. Pull-ups/diapers encouraged during transition period. Night-time training happens later and is usually a home-based process.</p>
-              </div>
-            </div>
-
-            <div class="accordion-item" data-category="transitions" data-searchable="How do you prepare children for kindergarten elementary school">
-              <button class="accordion-header">
-                <span><i class="fas fa-school"></i> How do you prepare children for kindergarten?</span>
-                <i class="fas fa-chevron-down"></i>
-              </button>
-              <div class="accordion-content">
-                <p>Pre-K classes have a specific focus on kindergarten readiness:</p>
-                <ul style="margin-left: 20px; margin-top: var(--spacing-md);">
-                  <li><strong>Academic Skills:</strong> Letter recognition, number concepts, pre-writing</li>
-                  <li><strong>Social Skills:</strong> Following directions, listening, cooperation, sharing</li>
-                  <li><strong>Self-Care:</strong> Bathroom independence, handwashing, eating etiquette</li>
-                  <li><strong>Kindergarten Visits:</strong> Field trips and speaking with kindergarten teachers</li>
-                  <li><strong>Parent Guidance:</strong> Tips for supporting school readiness at home</li>
-                  <li><strong>Records Sharing:</strong> Development portfolio shared with receiving school (with parent consent)</li>
-                </ul>
-                <p style="margin-top: var(--spacing-md);">We work closely with local schools to ensure smooth transitions for our graduates!</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- STILL HAVE QUESTIONS CTA -->
-    <section class="bg-background">
-      <div class="container" style="text-align: center; max-width: 600px; margin: 0 auto;">
-        <h2 style="margin-bottom: var(--spacing-lg);">Still Have Questions?</h2>
-        <p style="color: var(--text-light); font-size: var(--font-size-large); margin-bottom: var(--spacing-2xl);">
-          Don't see your question answered? Contact us directly or schedule a tour to learn more about NobleNest Daycare.
-        </p>
-        <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap;">
-          <a href="contact.html" class="btn btn-primary btn-large">Contact Us</a>
-          <a href="contact.html" class="btn btn-outline btn-large">Book a Tour</a>
-        </div>
+          </div><!-- /faq-panels -->
+        </div><!-- /faq-layout -->
       </div>
     </section>
   </main>
@@ -719,30 +610,103 @@
 
   <script src="js/main.js" defer></script>
   <script>
-    // FAQ Search Functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      const searchInput = document.getElementById('faq-search');
-      const faqItems = document.querySelectorAll('.accordion-item');
+  document.addEventListener('DOMContentLoaded', function () {
 
-      searchInput.addEventListener('input', function(e) {
-        const searchTerm = e.target.value.toLowerCase();
-
-        faqItems.forEach(item => {
-          const searchableText = item.getAttribute('data-searchable') || '';
-          const questionText = item.querySelector('.accordion-header span').textContent.toLowerCase();
-          const contentText = item.querySelector('.accordion-content').textContent.toLowerCase();
-
-          if (searchableText.toLowerCase().includes(searchTerm) || 
-              questionText.includes(searchTerm) || 
-              contentText.includes(searchTerm) ||
-              searchTerm === '') {
-            item.style.display = 'block';
-          } else {
-            item.style.display = 'none';
-          }
+    /* ── ACCORDION ─────────────────────────────────────── */
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const card = this.closest('.faq-card');
+        const isOpen = card.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.faq-card.open').forEach(c => {
+          c.classList.remove('open');
+          c.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
         });
+        // Toggle clicked
+        if (!isOpen) {
+          card.classList.add('open');
+          this.setAttribute('aria-expanded', 'true');
+        }
       });
     });
+
+    /* ── SIDEBAR CATEGORY FILTER ───────────────────────── */
+    const navBtns = document.querySelectorAll('.faq-nav-btn');
+    const sections = document.querySelectorAll('.faq-section');
+    const cta = document.getElementById('faq-bottom-cta');
+
+    navBtns.forEach(btn => {
+      btn.addEventListener('click', function () {
+        navBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const target = this.dataset.target;
+
+        if (target === 'all') {
+          sections.forEach(s => s.classList.add('visible'));
+        } else {
+          sections.forEach(s => {
+            s.classList.toggle('visible', s.dataset.section === target);
+          });
+        }
+        // Reset search
+        document.getElementById('faq-search').value = '';
+        document.getElementById('search-clear').style.display = 'none';
+        document.getElementById('search-results-count').style.display = 'none';
+        document.querySelectorAll('.faq-card').forEach(c => c.classList.remove('hidden'));
+        document.getElementById('no-results').style.display = 'none';
+        if (cta) cta.style.display = '';
+      });
+    });
+
+    /* ── SEARCH ────────────────────────────────────────── */
+    const searchInput = document.getElementById('faq-search');
+    const clearBtn = document.getElementById('search-clear');
+    const countEl = document.getElementById('search-results-count');
+    const noResults = document.getElementById('no-results');
+    const cards = document.querySelectorAll('.faq-card');
+
+    function runSearch(term) {
+      const q = term.trim().toLowerCase();
+      if (!q) {
+        cards.forEach(c => c.classList.remove('hidden'));
+        sections.forEach(s => {
+          const active = document.querySelector('.faq-nav-btn.active');
+          const target = active ? active.dataset.target : 'all';
+          s.classList.toggle('visible', target === 'all' || s.dataset.section === target);
+        });
+        countEl.style.display = 'none';
+        clearBtn.style.display = 'none';
+        noResults.style.display = 'none';
+        if (cta) cta.style.display = '';
+        return;
+      }
+
+      // Show all sections during search
+      sections.forEach(s => s.classList.add('visible'));
+      navBtns.forEach(b => b.classList.remove('active'));
+      document.querySelector('[data-target="all"]').classList.add('active');
+
+      let matched = 0;
+      cards.forEach(card => {
+        const searchAttr = card.dataset.search || '';
+        const text = card.textContent.toLowerCase();
+        const hit = searchAttr.includes(q) || text.includes(q);
+        card.classList.toggle('hidden', !hit);
+        if (hit) matched++;
+      });
+
+      clearBtn.style.display = 'inline-block';
+      countEl.style.display = 'block';
+      countEl.textContent = matched === 0
+        ? 'No matching questions found.'
+        : matched + ' question' + (matched !== 1 ? 's' : '') + ' matched';
+      noResults.style.display = matched === 0 ? 'block' : 'none';
+      if (cta) cta.style.display = matched === 0 ? 'none' : '';
+    }
+
+    searchInput.addEventListener('input', e => runSearch(e.target.value));
+    clearBtn.addEventListener('click', () => { searchInput.value = ''; runSearch(''); searchInput.focus(); });
+  });
   </script>
   <!-- CHAT NOW BUTTON -->
   <button class="chat-now-btn" onclick="if(typeof Tawk_API!=='undefined'){Tawk_API.maximize();}" aria-label="Chat with us now">
