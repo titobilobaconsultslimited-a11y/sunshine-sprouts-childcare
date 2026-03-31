@@ -1,4 +1,4 @@
-/* ============================================
+﻿/* ============================================
    GALLERY LIGHTBOX FUNCTIONALITY
    Image filtering and lightbox display
    ============================================ */
@@ -268,7 +268,7 @@ function openVideoLightbox(videoUrl) {
   // Create iframe for video
   lightboxImage.innerHTML = `<iframe width="100%" height="100%" src="${videoUrl}" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
   
-  lightboxCaption.textContent = 'Sunshine Sprouts Center Video';
+  lightboxCaption.textContent = 'NobleNest Daycare Center Video';
   lightbox.classList.add('active');
   document.body.style.overflow = 'hidden';
 

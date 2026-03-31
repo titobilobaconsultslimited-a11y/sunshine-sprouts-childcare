@@ -1,4 +1,4 @@
-/* ============================================
+﻿/* ============================================
    MAIN JAVASCRIPT - SHARED FUNCTIONALITY
    Navigation, Scroll Effects, Animations
    ============================================ */
@@ -444,7 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
   addPageTransition();
   
   // Log initialization for debugging
-  console.log('Sunshine Sprouts Website Initialized');
+  console.log('NobleNest Daycare Website Initialized');
 });
 
 // Prevent flash of unstyled content
