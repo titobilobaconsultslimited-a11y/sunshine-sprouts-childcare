@@ -225,6 +225,21 @@ nav {
   white-space: nowrap;
 }
 
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.logo-motto {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--text-light);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  font-family: var(--font-body);
+}
+
 .logo:hover {
   color: var(--accent);
 }
