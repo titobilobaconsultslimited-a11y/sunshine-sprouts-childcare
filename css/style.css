@@ -21,8 +21,10 @@
   --border: #E5D9C5;         /* Warm beige border */
 
   /* Typography */
-  --font-heading: 'Nunito', sans-serif;
-  --font-body: 'Open Sans', sans-serif;
+  --font-heading: 'Playfair Display', serif;
+  --font-logo: 'Cinzel', serif;
+  --font-body: 'Lato', sans-serif;
+  --font-ui: 'Open Sans', sans-serif;
   --font-size-base: 16px;
   --font-size-small: 14px;
   --font-size-large: 18px;
@@ -152,11 +154,11 @@ img {
 /* Forms */
 button {
   cursor: pointer;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
 }
 
 input, textarea, select {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: var(--font-size-base);
 }
 
@@ -214,7 +216,7 @@ nav {
 }
 
 .logo {
-  font-family: var(--font-heading);
+  font-family: var(--font-logo);
   font-size: 24px;
   font-weight: 700;
   color: var(--primary);
@@ -237,7 +239,7 @@ nav {
   color: var(--text-light);
   letter-spacing: 0.5px;
   white-space: nowrap;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
 }
 
 .logo:hover {
@@ -805,7 +807,7 @@ textarea {
   border: 2px solid var(--border);
   border-radius: var(--border-radius);
   font-size: var(--font-size-base);
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   transition: var(--transition-fast);
   background-color: var(--white);
 }
