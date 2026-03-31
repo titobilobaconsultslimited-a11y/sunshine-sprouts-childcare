@@ -8,17 +8,17 @@
    ============================================ */
 :root {
   /* Brand Colors */
-  --primary: #2E86AB;
-  --secondary: #F6AE2D;
-  --accent: #F26419;
-  --background: #F7F9FC;
-  --text: #1A1A2E;
-  --text-light: #6B7280;
-  --success: #43AA8B;
-  --error: #E63946;
+  --primary: #7C9E80;        /* Sage green */
+  --secondary: #C9A84C;      /* Soft gold */
+  --accent: #7B9EB7;         /* Dusty blue */
+  --background: #FAF4E8;     /* Warm cream */
+  --text: #2C2420;           /* Warm dark brown */
+  --text-light: #7A7060;     /* Warm gray */
+  --success: #6B9970;        /* Sage success green */
+  --error: #C25B4E;          /* Muted terracotta */
   --white: #FFFFFF;
   --card-bg: #FFFFFF;
-  --border: #E5E7EB;
+  --border: #E5D9C5;         /* Warm beige border */
 
   /* Typography */
   --font-heading: 'Nunito', sans-serif;
@@ -293,7 +293,7 @@ nav {
 
 .nav-cta:hover {
   color: var(--white);
-  background-color: #E54612;
+  background-color: #5C86A0;
   transform: scale(1.03);
   box-shadow: var(--shadow-md);
 }
@@ -411,7 +411,7 @@ nav {
 }
 
 .btn-primary:hover {
-  background-color: #1E5F8B;
+  background-color: #5E8263;
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -422,7 +422,7 @@ nav {
 }
 
 .btn-secondary:hover {
-  background-color: #2E9B7F;
+  background-color: #527A56;
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -433,7 +433,7 @@ nav {
 }
 
 .btn-accent:hover {
-  background-color: #E54612;
+  background-color: #5C86A0;
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -585,7 +585,7 @@ footer {
   margin-bottom: var(--spacing-2xl);
   justify-content: center;
   padding: var(--spacing-lg);
-  background-color: rgba(246, 174, 45, 0.1);
+  background-color: rgba(201, 168, 76, 0.12);
   border-radius: var(--border-radius);
 }
 
@@ -652,8 +652,8 @@ footer {
   justify-content: center;
   text-align: center;
   color: var(--white);
-  background: linear-gradient(135deg, rgba(46, 134, 171, 0.8), rgba(67, 170, 139, 0.8)), 
-              linear-gradient(135deg, #4A90E2, #50C878);
+  background: linear-gradient(135deg, rgba(124, 158, 128, 0.82), rgba(201, 168, 76, 0.75)), 
+              linear-gradient(135deg, #7C9E80, #C9A84C);
   background-size: cover;
   background-position: center;
   margin-top: 70px;
@@ -819,7 +819,7 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(46, 134, 171, 0.1);
+  box-shadow: 0 0 0 3px rgba(124, 158, 128, 0.2);
 }
 
 textarea {
@@ -902,27 +902,27 @@ input[type="radio"] + label {
 }
 
 .alert-success {
-  background-color: rgba(67, 170, 139, 0.1);
+  background-color: rgba(107, 153, 112, 0.12);
   border-color: var(--success);
-  color: #1E6B57;
+  color: #3D6B42;
 }
 
 .alert-error {
-  background-color: rgba(230, 57, 70, 0.1);
+  background-color: rgba(194, 91, 78, 0.12);
   border-color: var(--error);
-  color: #991B1B;
+  color: #8B2B22;
 }
 
 .alert-info {
-  background-color: rgba(46, 134, 171, 0.1);
+  background-color: rgba(123, 158, 183, 0.12);
   border-color: var(--primary);
-  color: #1E5F8B;
+  color: #3D6B8B;
 }
 
 .alert-warning {
-  background-color: rgba(246, 174, 45, 0.1);
+  background-color: rgba(201, 168, 76, 0.12);
   border-color: var(--secondary);
-  color: #8B6B00;
+  color: #7A5E00;
 }
 
 .alert-icon {
@@ -1773,14 +1773,14 @@ input[type="radio"] + label {
   padding: var(--spacing-2xl);
   border: 2px dashed var(--primary);
   border-radius: var(--border-radius);
-  background-color: rgba(46, 134, 171, 0.02);
+  background-color: rgba(124, 158, 128, 0.02);
   cursor: pointer;
   transition: var(--transition-fast);
 }
 
 .file-upload-label:hover {
   border-color: var(--accent);
-  background-color: rgba(46, 134, 171, 0.05);
+  background-color: rgba(124, 158, 128, 0.05);
 }
 
 /* Checklist styling */
@@ -1813,7 +1813,7 @@ input[type="radio"] + label {
 
 /* Info box */
 .info-box {
-  background-color: rgba(46, 134, 171, 0.08);
+  background-color: rgba(124, 158, 128, 0.08);
   border-left: 4px solid var(--primary);
   padding: var(--spacing-lg);
   border-radius: var(--border-radius);
@@ -1821,12 +1821,12 @@ input[type="radio"] + label {
 }
 
 .info-box.warning {
-  background-color: rgba(246, 174, 45, 0.08);
+  background-color: rgba(201, 168, 76, 0.08);
   border-left-color: var(--secondary);
 }
 
 .info-box.success {
-  background-color: rgba(67, 170, 139, 0.08);
+  background-color: rgba(107, 153, 112, 0.08);
   border-left-color: var(--success);
 }
 
